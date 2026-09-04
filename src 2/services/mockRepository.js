@@ -194,6 +194,7 @@ export const repository = {
   async getGuestState() { return clone(state.guest); },
   async useGuestAllocation() { state.guest.allocationUsed = true; persist(); return clone(state.guest); },
   async listUsers() { return clone(state.users); },
+  async users() { return clone(state.users); },
   async getSession() { return clone(state.session); },
   // Mock identity switch — stands in for real sign-in until an auth backend exists.
   async setSession(identity) {

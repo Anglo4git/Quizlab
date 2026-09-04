@@ -44,3 +44,11 @@ Netlify is configured to run `npm run build` and publish `dist/`.
 8. Deploy.
 
 After that, pushes to the GitHub repository can trigger automatic Netlify deployments.
+
+## GitHub Pages (optional)
+
+A workflow at `.github/workflows/deploy-pages.yml` builds and deploys to GitHub Pages automatically on push to `main`. To enable it:
+
+1. Repo Settings → Pages → Build and deployment → Source: **GitHub Actions**.
+2. (Optional) To use real Supabase data on the Pages deploy too, add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` under Settings → Secrets and variables → Actions. If you skip this, the app automatically falls back to bundled mock/demo data instead of crashing — see `src/services/appService.js`.
+3. Push to `main`. The workflow builds with the correct `/<repo-name>/` base path so assets resolve correctly under `https://<user>.github.io/<repo-name>/`.

@@ -1,4 +1,14 @@
-import { repository } from './supabaseRepository.js';
+import { repository as supabaseRepository } from './supabaseRepository.js';
+import { repository as mockRepository } from './mockRepository.js';
+import { supabase } from './supabaseClient.js';
+
+// If VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY aren't set at build time
+// (e.g. a plain GitHub Pages deploy with no way to inject env vars),
+// fall back to the bundled mock/demo data instead of throwing on every call.
+if (!supabase) {
+  console.warn('[QuizLab] Supabase is not configured — using mock/demo data instead.');
+}
+const repository = supabase ? supabaseRepository : mockRepository;
 
 export const appService = {
   listQuizzes: filter => repository.listQuizzes(filter), getQuiz: id => repository.getQuiz(id), createQuiz: data => repository.createQuiz(data), updateQuiz: (id, patch) => repository.updateQuiz(id, patch),

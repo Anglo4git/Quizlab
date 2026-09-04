@@ -26,7 +26,16 @@ function wireShell(){
   if(!sel)return;
   sel.onclick=async()=>{await appService.setSession('guest');await loadSession();router.navigate('/quizzes');};
 }
-async function init(){await loadSession();store.teacherModeEnabled=(await appService.settings()).teacherModeEnabled;router.renderCurrent()}
+async function init(){
+  try{
+    await loadSession();
+    store.teacherModeEnabled=(await appService.settings()).teacherModeEnabled;
+    router.renderCurrent();
+  }catch(e){
+    console.error(e);
+    app.innerHTML=`<div class="error-page"><h2>Something went wrong</h2><p>${e.message}</p></div>`;
+  }
+}
 async function render(rawPath){
  try{
   // Strip any `?query` before route matching so pages that stash UI state

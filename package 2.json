@@ -9,7 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@supabase/supabase-js": "2.57.0"
+    "@supabase/supabase-js": "2.57.0",
+    "puppeteer": "^25.10.0"
   },
   "devDependencies": {
     "vite": "7.1.3"
